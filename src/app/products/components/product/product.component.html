@@ -1,0 +1,8 @@
+<div>
+  <div>{{ product.name }}</div>
+  <div>{{ product.description }}</div>
+  <div>{{ product.price }}</div>
+  <div>{{ product.category }}</div>
+  <div><span *ngFor="let tag of product.tags">{{ tag }} </span></div>
+  <button *ngIf="showBuyBtn" (click)="onBuy()">Buy</button>
+</div>

@@ -1,0 +1,13 @@
+<div *ngIf="products.length; else emptyCart" class="cart">
+  <ul>
+    <li *ngFor="let product of products">
+      <app-product [product]="product" [showBuyBtn]="false"></app-product>
+    </li>
+  </ul>
+  <button (click)="onClear()">Clear</button>
+</div>
+<ng-template #emptyCart>
+  <div class="cart">
+    Your cart is empty
+  </div>
+</ng-template>
