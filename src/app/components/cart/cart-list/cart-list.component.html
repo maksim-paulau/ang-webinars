@@ -1,7 +1,7 @@
 <div *ngIf="products.length; else emptyCart" class="cart">
   <ul>
     <li *ngFor="let product of products">
-      <app-product [product]="product" [showBuyBtn]="false"></app-product>
+      <app-product [product]="product" [showAddToCartBtn]="false"></app-product>
     </li>
   </ul>
   <button (click)="onClear()">Clear</button>

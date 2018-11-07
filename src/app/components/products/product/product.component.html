@@ -4,5 +4,5 @@
   <div>{{ product.price }}</div>
   <div>{{ product.category }}</div>
   <div><span *ngFor="let tag of product.tags">{{ tag }} </span></div>
-  <button *ngIf="showBuyBtn" (click)="onBuy()">Buy</button>
+  <button *ngIf="showAddToCartBtn" (click)="onAddToCart()">Add to cart</button>
 </div>
