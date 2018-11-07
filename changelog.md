@@ -1,2 +1,4 @@
-1. Products: show list of products with information (name, description, price, tags), add product to cart
-2. Cart: show products in cart, clear cart
+1. Re-structure the project - split on modules
+2. Additional functionality in cart.service
+3. Use @ViewChild for showing the title of application
+4. Use the directive "appHighlight" with HostBindings and HostListeners
