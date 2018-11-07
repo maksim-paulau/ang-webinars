@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ProductCategory } from '../enums/product-category.enum';
-import { IProduct } from '../interfaces/product';
+import { ProductCategory } from '../product-category.enum';
+import { IProduct } from '../product';
 import { CartService } from '../../cart/cart.service';
 
 @Component({
@@ -10,8 +10,7 @@ import { CartService } from '../../cart/cart.service';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product: IProduct; 
-  @Input() showAddToCartBtn: boolean = true; 
+  @Input() product: IProduct;  
 
   @Output() addToCart: EventEmitter<IProduct> = new EventEmitter();
 

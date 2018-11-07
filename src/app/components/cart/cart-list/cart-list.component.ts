@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
-import { IProduct } from '../../products/interfaces/product';
+import { IProduct } from '../../products/product';
 
 @Component({
   selector: 'app-cart',
@@ -16,9 +16,21 @@ export class CartListComponent implements OnInit {
 
   onClear(): void {
     this.cartService.clear();    
+  }  
+
+  onRemove(product: IProduct): void {
+    this.cartService.removeProduct(product);
   }
 
   get products(): IProduct[] {
     return this.cartService.productsInCart;
+  }
+
+  get quantity(): number {
+    return this.cartService.productsQuantity;
+  }
+
+  get price(): number {
+    return this.cartService.summaryPrice;
   }
 }
