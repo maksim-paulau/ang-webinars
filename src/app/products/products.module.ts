@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductComponent } from './product/product.component';
-import { ProductsService } from './products.service';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductComponent } from './components/product/product.component';
+import { ProductsService } from './services/products.service';
 import { CartService } from '../cart/cart.service';
 
 @NgModule({
@@ -14,8 +14,7 @@ import { CartService } from '../cart/cart.service';
     CommonModule
   ],
   exports: [
-    ProductListComponent,
-    ProductComponent
+    ProductListComponent
   ],
   providers: [
     ProductsService,

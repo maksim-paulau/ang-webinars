@@ -1,5 +1,5 @@
-import { IProduct } from "./product";
-import { ProductCategory } from "./product-category.enum";
+import { IProduct } from "./product.interface";
+import { ProductCategory } from "../product-category.enum";
 
 export class ProductModel implements IProduct{
     constructor(
