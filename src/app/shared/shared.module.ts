@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HighlightDirective } from './highlight.directive';
+import { CustomizeOnClickDirective } from './customize-on-click.directive';
 
 @NgModule({
   declarations: [
-    HighlightDirective
+    HighlightDirective,
+    CustomizeOnClickDirective
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    HighlightDirective
+    HighlightDirective,
+    CustomizeOnClickDirective
   ]
 })
 export class SharedModule { }

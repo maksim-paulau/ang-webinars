@@ -1,36 +1,57 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../products/models/product.interface';
+import { CartItem } from './models/cart-item';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class CartService {
 
-  private products: IProduct[] = [];
+  private products: CartItem[] = [];
   private summary: number = 0;
+  private quantity: number = 0;
 
   constructor() { }
 
   addProduct(product: IProduct): void {
-    this.products.push(product);
-    product.isAvailable = false;
+
+    let existingProduct: CartItem = this.products.find(p => p.id == product.id);
+
+    if (existingProduct) {
+      existingProduct.quantity++;
+    }
+    else {
+      this.products.push({...product, quantity: 1});  
+    }    
+    
     this.summary += product.price;
+    this.quantity++;
   }
 
   removeProduct(product: IProduct): void {
-    this.products = this.products.filter(p => p !== product);
-    this.summary -= product.price;
-    product.isAvailable = true;
+    
+    let existingProduct: CartItem = this.products.find(p => p.id == product.id);
+
+    if (existingProduct.quantity > 1) {
+      existingProduct.quantity--;
+    }
+    else {
+      this.products.splice(this.products.indexOf(existingProduct), 1);  
+    }
+
+    this.summary -= product.price; 
+    this.quantity--;   
   }
 
   clear(): void {
     this.products = [];
+    this.quantity = 0;
   }
 
-  get productsInCart() : IProduct[] {
+  get productsInCart() : CartItem[] {
     return this.products;
   }
   
   get productsQuantity(): number {
-    return this.products.length;
+    return this.quantity;
   }
 
   get summaryPrice(): number {

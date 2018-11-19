@@ -13,12 +13,12 @@ export class HighlightDirective {
 
   @HostListener('mouseenter')
   onmouseenter(event) {    
-    this.currentColor = "gray";
+    this.currentColor = this.appHighlight;
   }
 
   @HostListener("mouseleave")
   onmouseleave(event) {
-    this.currentColor = "transparent";
+    this.currentColor = null;
   }
 
   @HostBinding("style.backgroundColor") get getBackgroundColor() {

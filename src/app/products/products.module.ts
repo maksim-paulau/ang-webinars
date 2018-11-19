@@ -16,9 +16,6 @@ import { CartService } from '../cart/cart.service';
   exports: [
     ProductListComponent
   ],
-  providers: [
-    ProductsService,
-    CartService
-  ]
+  providers: []
 })
 export class ProductsModule { }
