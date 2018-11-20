@@ -10,7 +10,7 @@ import { CartService } from '../../../cart/cart.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: IProduct[];
+  products: Promise<IProduct[]>;
 
   constructor(
     private productsService: ProductsService,

@@ -19,7 +19,7 @@ export class CartService {
       existingProduct.quantity++;
     }
     else {
-      this.products.push({...product, quantity: 1});  
+      this.products.push({...product, quantity: 1});
     }    
     
     this.summary += product.price;

@@ -13,7 +13,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     AppComponent,
     ContactUsComponent
   ],
-  imports: [
+  imports: [    
     BrowserModule,
     ProductsModule,
     CartModule,

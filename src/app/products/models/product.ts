@@ -9,6 +9,10 @@ export class ProductModel implements IProduct{
         public price: number,
         public isAvailable: boolean,
         public category: ProductCategory,
-        public tags: string[]) {
+        public tags: string[],
+        ) {
+        this.categoryName = ProductCategory[category];
     }
+
+    categoryName: string;
 }

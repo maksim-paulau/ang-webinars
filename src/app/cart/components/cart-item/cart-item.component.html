@@ -1,5 +1,6 @@
 <div appHighlight="green">
   <div>{{ product.name }}</div>
+  <div>{{ product.price | currency:'EUR' }}</div>
   <div>{{ product.quantity }}</div>
   <button (click)="onRemove()">Remove</button>
 </div>
