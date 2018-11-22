@@ -5,23 +5,23 @@ import { Directive, HostListener, Input, HostBinding } from '@angular/core';
 })
 export class HighlightDirective {
 
-  @Input("appHighlight") appHighlight: string;
+  @Input() appHighlight: string;
 
-  private currentColor = "transparent";
+  private currentColor = 'transparent';
 
   constructor() { }
 
   @HostListener('mouseenter')
-  onmouseenter(event) {    
+  onmouseenter(event) {
     this.currentColor = this.appHighlight;
   }
 
-  @HostListener("mouseleave")
+  @HostListener('mouseleave')
   onmouseleave(event) {
     this.currentColor = null;
   }
 
-  @HostBinding("style.backgroundColor") get getBackgroundColor() {
+  @HostBinding('style.backgroundColor') get getBackgroundColor() {
     return this.currentColor;
   }
 }

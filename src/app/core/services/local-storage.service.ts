@@ -14,7 +14,7 @@ export class LocalStorageService {
   }
 
   getItem(key: string): string {
-    let value = localStorage.getItem(key);
+    const value = localStorage.getItem(key);
     console.log('get item call');
     console.log('current localStorage length: ' + localStorage.length);
     return value;

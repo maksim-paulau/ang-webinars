@@ -10,29 +10,29 @@ import { OrderByPipe } from '../../../shared/order-by.pipe';
   styleUrls: ['./cart-list.component.css'],
   providers: [OrderByPipe]
 })
-export class CartListComponent implements OnInit {  
+export class CartListComponent implements OnInit {
 
   public sortBy: string;
-  public sortDesc: boolean = true;
+  public sortDesc = true;
 
   constructor(private cartService: CartService,
               private orderByPipe: OrderByPipe) { }
 
-  ngOnInit() {    
+  ngOnInit() {
   }
 
   onClear(): void {
-    this.cartService.clear();    
-  }  
+    this.cartService.clear();
+  }
 
   onRemove(product: IProduct): void {
     this.cartService.removeProduct(product);
   }
 
-  get products(): CartItem[] {   
+  get products(): CartItem[] {
     if (this.sortBy) {
       return this.orderByPipe.transform(this.cartService.productsInCart, this.sortBy, this.sortDesc);
-    } 
+    }
     return this.cartService.productsInCart;
   }
 

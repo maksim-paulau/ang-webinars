@@ -8,7 +8,7 @@ import { IProduct } from '../../models/product.interface';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product: IProduct;  
+  @Input() product: IProduct;
 
   @Output() addToCart: EventEmitter<IProduct> = new EventEmitter();
 
@@ -18,6 +18,6 @@ export class ProductComponent implements OnInit {
   }
 
   onAddToCart() {
-    this.addToCart.emit(this.product)
+    this.addToCart.emit(this.product);
   }
 }

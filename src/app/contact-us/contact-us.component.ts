@@ -11,7 +11,7 @@ export class ContactUsComponent implements OnInit {
   constructor(
     @Optional() private localStorageService: LocalStorageService,
     @Optional() private configOptionsService: ConfigOptionsService,
-    @Optional() private constantsService: ConstantsService,
+    @Inject(ConstantsService) private constantsService: any,
     @Inject(GeneratorService) private generator: any
   ) { }
 
@@ -21,5 +21,4 @@ export class ContactUsComponent implements OnInit {
     console.log (this.constantsService);
     console.log (this.generator);
   }
-
 }

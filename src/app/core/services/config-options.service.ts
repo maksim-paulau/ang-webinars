@@ -6,7 +6,7 @@ import { ConfigOptions } from '../config-options';
 })
 export class ConfigOptionsService {
 
-  private configOptions: ConfigOptions = {};
+  private configOptions: ConfigOptions = new ConfigOptions(1, 'testLogin', 'testEmail@test.test');
 
   constructor() { }
 

@@ -6,10 +6,10 @@ import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  
-  @ViewChild("appTitle") appTitle: ElementRef;
-  
+
+  @ViewChild('appTitle') appTitle: ElementRef;
+
   ngOnInit(): void {
-    this.appTitle.nativeElement.innerHTML = "Shop";
+    this.appTitle.nativeElement.innerHTML = 'Shop';
   }
 }

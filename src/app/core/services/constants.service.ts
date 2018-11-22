@@ -1,9 +1,3 @@
-import { Injectable } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ConstantsService {
-
-  constructor() { }
-}
+export const ConstantsService = new InjectionToken<any[]>('ConstantsService');

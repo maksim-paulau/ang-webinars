@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LocalStorageService, ConstantsService, GeneratorService, GeneratorFactory } from "./services"
+import { LocalStorageService, ConstantsService, GeneratorService, GeneratorFactory } from './services';
 
 
 @NgModule({

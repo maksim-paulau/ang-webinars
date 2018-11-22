@@ -6,39 +6,36 @@ import { CartItem } from './models/cart-item';
 export class CartService {
 
   private products: CartItem[] = [];
-  private summary: number = 0;
-  private quantity: number = 0;
+  private summary = 0;
+  private quantity = 0;
 
   constructor() { }
 
   addProduct(product: IProduct): void {
 
-    let existingProduct: CartItem = this.products.find(p => p.id == product.id);
+    const existingProduct: CartItem = this.products.find(p => p.id === product.id);
 
     if (existingProduct) {
       existingProduct.quantity++;
-    }
-    else {
+    } else {
       this.products.push({...product, quantity: 1});
-    }    
-    
+    }
+
     this.summary += product.price;
     this.quantity++;
   }
 
   removeProduct(product: IProduct): void {
-    
-    let existingProduct: CartItem = this.products.find(p => p.id == product.id);
+    const existingProduct: CartItem = this.products.find(p => p.id === product.id);
 
     if (existingProduct.quantity > 1) {
       existingProduct.quantity--;
-    }
-    else {
-      this.products.splice(this.products.indexOf(existingProduct), 1);  
+    } else {
+      this.products.splice(this.products.indexOf(existingProduct), 1);
     }
 
-    this.summary -= product.price; 
-    this.quantity--;   
+    this.summary -= product.price;
+    this.quantity--;
   }
 
   clear(): void {
@@ -46,10 +43,10 @@ export class CartService {
     this.quantity = 0;
   }
 
-  get productsInCart() : CartItem[] {
+  get productsInCart(): CartItem[] {
     return this.products;
   }
-  
+
   get productsQuantity(): number {
     return this.quantity;
   }
