@@ -1,22 +1,37 @@
-<div *ngIf="products.length; else emptyCart" class="cart">
-  <div>Quantity: {{ quantity }}</div>
-  <div>Summary price: {{ price | number | currency:'EUR' }}</div>
-  Sort by
-  <select [(ngModel)]="sortBy">
-    <option value="price">by price</option>
-    <option value="quantity">by quantity</option>
-    <option value="name">by name</option>
-  </select>
-  desc <input type="checkbox" [(ngModel)]="sortDesc" />
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let product of products">
-      <app-cart-item [product]="product" (remove)="onRemove($event)"></app-cart-item>
-    </li>
-  </ul>
-  <button (click)="onClear()">Clear</button>
-</div>
-<ng-template #emptyCart>
-  <div class="cart">
-    Your cart is empty
+<div class="container">
+  <div class="row">
+  <div class="col-md-6">
+    <div *ngIf="products.length; else emptyCart" class="cart">
+      <div>Quantity: {{ quantity }}</div>
+      <div>Summary price: {{ price | number | currency:'EUR' }}</div>
+      Sort by
+      <select [(ngModel)]="sortBy">
+        <option value="price">by price</option>
+        <option value="quantity">by quantity</option>
+        <option value="name">by name</option>
+      </select>
+      desc <input type="checkbox" [(ngModel)]="sortDesc" />
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let product of products">
+          <app-cart-item [product]="product" (remove)="onRemove($event)"></app-cart-item>
+        </li>
+      </ul>
+      <button (click)="onClear()">Clear</button>
+    </div>
+    <ng-template #emptyCart>
+      <div class="cart">
+        Your cart is empty
+      </div>
+    </ng-template>
   </div>
-</ng-template>
+  <div class="col-md-6">
+    <button *ngIf="!showOrderForm && products.length" (click)="onShowOrderForm()">
+      Make order
+    </button>
+    <app-order-form *ngIf="showOrderForm"
+    (submit)="onSubmit($event)" 
+    (cancel)="onOrderFormCancel()">  
+    </app-order-form>
+  </div>
+</div>
+</div>

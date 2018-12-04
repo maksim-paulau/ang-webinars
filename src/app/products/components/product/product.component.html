@@ -1,8 +1,10 @@
 <div>
-  <div>{{ product.name }}</div>
+  <a routerLink="/product/{{product.id}}">
+    <div>{{ product.name }}</div>
+  </a>
   <div>{{ product.description }}</div>
   <div>{{ product.price | currency:'EUR' }}</div>
   <div>{{ product.categoryName | uppercase }}</div>
   <div><span *ngFor="let tag of product.tags">{{ tag | lowercase }} </span></div>
-  <button [disabled]="!product.isAvailable" (click)="onAddToCart()">Add to cart</button>
+  <button [disabled]="!product.isAvailable" (click)="onAddToCart()">Add to cart</button>  
 </div>

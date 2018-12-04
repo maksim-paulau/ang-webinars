@@ -1,4 +1,5 @@
 import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
+import { CartService } from './cart/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,10 @@ import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 export class AppComponent implements OnInit {
 
   @ViewChild('appTitle') appTitle: ElementRef;
+
+  constructor(
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.appTitle.nativeElement.innerHTML = 'Shop';
