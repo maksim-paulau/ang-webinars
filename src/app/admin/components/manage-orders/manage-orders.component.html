@@ -1,0 +1,18 @@
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let order of orderService.getOrders()">
+    <div class="row">
+      <div class="col-md-8">
+        <div>Client Name: {{order.clientName}}</div>
+        <div>Phone Number: {{order.clientPhoneNumber}}</div>
+        <div>Summary: {{order.summaryPrice | currency:'EUR'}}</div>    
+      </div>
+      <div class="col-md-2">
+        <div *ngIf="order.done">Done</div>
+      </div>
+      <div class="col-md-2">
+        <button *ngIf="!order.done" type="button" (click)="onDone(order.id)" class="btn btn-success">Done</button>       
+        <button type="button" (click)="onDelete(order.id)" class="btn btn-danger">X</button>        
+      </div>
+    </div>
+  </li>
+</ul>

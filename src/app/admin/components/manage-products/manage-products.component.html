@@ -1,0 +1,19 @@
+<button class="btn" routerLink="/product/create">Create</button>
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let product of productsService.getProducts()| async">
+      <div class="row">
+        <div class="col-md-9">
+          <div>Name: {{product.name}}</div>
+          <div>Description: {{product.description}}</div>
+          <div>Price: {{product.price | currency:'EUR'}}</div>    
+        </div>  
+        <div class="col-md-1">
+          <a routerLink="/product/{{product.id}}/edit">Edit</a>
+        </div>      
+        <div class="col-md-2">
+          <input type="checkbox" [value]="product.isAvailable" [(ngModel)]="product.isAvailable" />Available
+          <button type="button" (click)="onDelete(product.id)" class="btn btn-danger">X</button>        
+        </div>
+      </div>
+    </li>
+  </ul>

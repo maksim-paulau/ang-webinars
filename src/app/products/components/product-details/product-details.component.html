@@ -1,0 +1,20 @@
+<div class="container">
+  <div *ngIf="product">
+    <h1 class="display-1">{{ product.name }}</h1>
+    <div>{{ product.description }}</div>
+    <div>{{ product.price | currency:'EUR' }}</div>
+    <div>{{ product.categoryName | uppercase }}</div>
+    <div><span *ngFor="let tag of product.tags">{{ tag | lowercase }} </span></div>
+    <button [disabled]="!product.isAvailable" (click)="onAddToCart()" class="btn btn-success">Add to cart</button> 
+  </div>
+  <div *ngIf="!product && !notFound">
+    Loading...
+  </div>
+  <div *ngIf="notFound">
+    Product not found
+  </div>
+  <div>
+    <button (click)="onDisplayFeedback()" class="btn btn-light">Show feedback</button>
+    <router-outlet name="feedback"></router-outlet>
+  </div>
+</div>
