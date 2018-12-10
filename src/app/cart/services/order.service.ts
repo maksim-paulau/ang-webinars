@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Order } from '../models/order';
 import { CartItem } from '../models/cart-item';
-import { LocalStorage } from '../../core/services';
+import { LocalStorageService } from '../../core/services';
 
 const ordersStorageKey = 'orders';
 
@@ -12,7 +12,7 @@ export class OrderService {
 
   private orders: Order[];
 
-  constructor(@Inject(LocalStorage) private localStorage: any) {
+  constructor(private localStorage: LocalStorageService) {
     this.orders = JSON.parse(this.localStorage.getItem(ordersStorageKey)) || [];
   }
 

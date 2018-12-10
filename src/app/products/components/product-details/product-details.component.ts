@@ -4,6 +4,7 @@ import { ProductsService } from '../../services/products.service';
 import { switchMap } from 'rxjs/operators';
 import { IProduct } from '../../models/product.interface';
 import { CartService } from '../../../cart/services/cart.service';
+import { ProductsPromiseService } from '../../services/products-promise.service';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productsService: ProductsService,
+    private productsService: ProductsPromiseService,
     private cartService: CartService
   ) { }
 

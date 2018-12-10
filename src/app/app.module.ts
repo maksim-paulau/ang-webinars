@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { Router } from '@angular/router';
 import { PathNotFoundComponent } from './layout/components/path-not-found/path-not-found.component';
 import { LoginComponent } from './layout/components/login/login.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TimingInterceptor } from './core/interceptors/timing.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,16 @@ import { LoginComponent } from './layout/components/login/login.component';
     CartModule,
     SharedModule,
     CoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TimingInterceptor,
+      multi: true,
+    }
+
   ],
   bootstrap: [AppComponent]
 })

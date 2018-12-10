@@ -7,6 +7,7 @@ import { OrderService } from '../../services/order.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
+import { OrderObservableService } from '../../services/order-observable.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +22,7 @@ export class CartListComponent implements OnInit {
   public showOrderForm: boolean;
 
   constructor(private cartService: CartService,
-              private orderService: OrderService,
+              private orderService: OrderObservableService,
               private orderByPipe: OrderByPipe,
               private router: Router) { }
 
@@ -49,10 +50,13 @@ export class CartListComponent implements OnInit {
     this.cartService.removeProduct(product);
   }
 
-  onSubmit(formData: any): void {
-    this.orderService.createOrder(formData.name, formData.phone, this.cartService.productsInCart, this.cartService.summaryPrice);
-    this.showOrderForm = false;
-    this.onClear();
+  onOrderSubmit(formData: any): void {
+    const sub = this.orderService.createOrder(formData.name, formData.phone, this.cartService.productsInCart, this.cartService.summaryPrice)
+    .subscribe(() => {
+      this.showOrderForm = false;
+      this.onClear();
+      sub.unsubscribe();
+    });
   }
 
   onShowOrderForm(): void {

@@ -1,0 +1,82 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Picture P. Picasso",
+      "description": "One of the greatest works of the greatest master",
+      "price": 365,
+      "isAvailable": true
+    },
+    {
+      "id": 2,
+      "name": "Toy Car",
+      "description": "",
+      "price": 59,
+      "isAvailable": true,
+      "category": 0,
+      "tags": [],
+      "categoryName": "unknown"
+    },
+    {
+      "id": 3,
+      "name": "ввв",
+      "description": "",
+      "price": 333,
+      "isAvailable": false,
+      "category": 0,
+      "tags": [],
+      "categoryName": "unknown"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "clientName": "DDD",
+      "clientPhoneNumber": "23",
+      "products": [
+        {
+          "id": 1,
+          "name": "Picture P. Picasso",
+          "description": "One of the greatest works of the greatest master",
+          "price": 2560,
+          "isAvailable": true,
+          "quantity": 2
+        }
+      ],
+      "summaryPrice": 5120,
+      "done": false
+    },
+    {
+      "id": 2,
+      "products": [
+        {
+          "id": 1,
+          "name": "Picture P. Picasso",
+          "description": "One of the greatest works of the greatest master",
+          "price": 2560,
+          "isAvailable": true,
+          "quantity": 2
+        }
+      ],
+      "summaryPrice": 5120,
+      "done": false
+    },
+    {
+      "id": 3,
+      "clientName": "fdsfs",
+      "clientPhoneNumber": "fds",
+      "products": [
+        {
+          "id": 1,
+          "name": "Picture P. Picasso",
+          "description": "One of the greatest works of the greatest master",
+          "price": 365,
+          "isAvailable": true,
+          "quantity": 2
+        }
+      ],
+      "summaryPrice": 730,
+      "done": false
+    }
+  ]
+}

@@ -29,7 +29,7 @@
       Make order
     </button>
     <app-order-form *ngIf="showOrderForm"
-    (submit)="onSubmit($event)" 
+    (orderSubmit)="onOrderSubmit($event)" 
     (cancel)="onOrderFormCancel()">  
     </app-order-form>
   </div>

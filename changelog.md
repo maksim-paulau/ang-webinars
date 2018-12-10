@@ -1,6 +1,3 @@
-1. Implemented CartFeatureArea, ProductsFeatureArea, AdminFeatureArea
-2. Added ProductDetails page with the using of named router-outlet for displaying a feedback(see \src\app\products\components\product-details\product-details.component.html, \src\app\products\products-routing.module.ts) 
-3. Added possibility to make order for buying the products from the cart (see \src\app\cart\components\cart-list\cart-list.component.ts) with the using of route extra-parameter
-4. Implemented admin panel with possibilities to manage products and orders
-5. Added using of localStorage to store orders and cart items (see \src\app\cart\services)
-6. Added AuthGuard, that protects the Admin panel and lets to dynamically load the Admin module
+1. Added using of JSON-api and HttpClient (see \src\app\cart\services\order-observable.service.ts, \src\app\products\services\products-promise.service.ts)
+2. Added TimingInterceptor (see \src\app\core\interceptors\timing.interceptor.ts), that log executing time of requests to Products JSON endpoint
+3. Implemented AppSettingsService, that tries to retrieve settings from localStorage/json (see \src\app\core\services\app-settings.service.ts)

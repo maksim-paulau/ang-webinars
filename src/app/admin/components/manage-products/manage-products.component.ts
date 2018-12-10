@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../products/services/products.service';
+import { ProductsPromiseService } from 'src/app/products/services/products-promise.service';
+import { ProductModel } from 'src/app/products/models/product';
 
 @Component({
   selector: 'app-manage-products',
@@ -8,12 +10,19 @@ import { ProductsService } from '../../../products/services/products.service';
 })
 export class ManageProductsComponent implements OnInit {
 
-  constructor(private productsService: ProductsService) { }
+  products: Promise<ProductModel[]>;
+
+  constructor(private productsService: ProductsPromiseService) { }
 
   ngOnInit() {
+    this.products = this.productsService.getProducts();
   }
 
   onDelete(id: number): void {
     this.productsService.deleteProduct(id);
+  }
+
+  onUpdate(product: ProductModel): void {
+    this.productsService.updateProduct(product);
   }
 }

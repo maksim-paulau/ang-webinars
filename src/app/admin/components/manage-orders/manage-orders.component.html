@@ -1,5 +1,5 @@
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let order of orderService.getOrders()">
+  <li class="list-group-item" *ngFor="let order of orders$ | async">
     <div class="row">
       <div class="col-md-8">
         <div>Client Name: {{order.clientName}}</div>

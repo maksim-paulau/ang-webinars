@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { ProductsService } from '../../services/products.service';
 import { ProductModel } from '../../models/product';
+import { ProductsPromiseService } from '../../services/products-promise.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -17,7 +18,7 @@ export class ProductEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productsService: ProductsService) {}
+    private productsService: ProductsPromiseService) {}
 
   ngOnInit() {
 
@@ -36,12 +37,10 @@ export class ProductEditComponent implements OnInit {
     const product = { ...this.product };
 
     if (product.id) {
-      this.productsService.updateProduct(product);
+      this.productsService.updateProduct(product).then(() => this.onGoBack());
     } else {
-      this.productsService.createProduct(product);
+      this.productsService.createProduct(product).then(() => this.onGoBack());
     }
-
-    this.onGoBack();
   }
 
   onGoBack(): void {

@@ -12,7 +12,7 @@ export class OrderFormComponent implements OnInit {
   @Input() products: CartItem[];
   @Input() summaryPrice: number;
 
-  @Output() submit: EventEmitter<any> = new EventEmitter<any>();
+  @Output() orderSubmit: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
 
   customer: any;
@@ -23,7 +23,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    this.submit.emit(form.value);
+    this.orderSubmit.emit(form.value);
   }
 
   onCancel() {

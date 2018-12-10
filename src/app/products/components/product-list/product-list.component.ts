@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { IProduct } from '../../models/product.interface';
 import { CartService } from '../../../cart/services/cart.service';
+import { ProductsPromiseService } from '../../services/products-promise.service';
 
 @Component({
   selector: 'app-product-list',
@@ -13,7 +14,7 @@ export class ProductListComponent implements OnInit {
   products: Promise<IProduct[]>;
 
   constructor(
-    private productsService: ProductsService,
+    private productsService: ProductsPromiseService,
     private cartService: CartService
   ) { }
 

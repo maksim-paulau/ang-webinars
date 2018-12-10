@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../cart/services/order.service';
 import { Order } from '../../../cart/models/order';
+import { OrderObservableService } from 'src/app/cart/services/order-observable.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manage-orders',
@@ -9,18 +11,22 @@ import { Order } from '../../../cart/models/order';
 })
 export class ManageOrdersComponent implements OnInit {
 
+  orders$: Observable<Order[]>;
+
   constructor(
-    private orderService: OrderService
+    private orderService1: OrderService,
+    private orderService: OrderObservableService
   ) { }
 
   ngOnInit() {
+    this.orders$ = this.orderService.getOrders();
   }
 
   onDelete(orderId: number): void {
-    this.orderService.deleteOrder(orderId);
+    this.orderService1.deleteOrder(orderId);
   }
 
   onDone(orderId: number): void {
-    this.orderService.markAsDone(orderId);
+    this.orderService1.markAsDone(orderId);
   }
 }
