@@ -3,7 +3,7 @@ import { LocalStorageService } from './local-storage.service';
 import { AppSettings } from '../app-settings';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,18 @@ export class AppSettingsService {
       return of(appSettings);
     }
 
-    return this.retrieveFromJson();
+    return this.retrieveFromJson().pipe(
+      map(data => {
+        const appSettingsFromJson = data as AppSettings;
+        this.localStorage.setItem(this.appSettingKey, JSON.stringify(appSettingsFromJson));
+        return appSettingsFromJson;
+      }),
+      catchError(() => {
+        const defaultAppSettings = new AppSettings();
+        this.localStorage.setItem(this.appSettingKey, JSON.stringify(defaultAppSettings));
+        return of(defaultAppSettings);
+      })
+    );
   }
 
   retrieveFromLocalStorage(): any {
@@ -30,17 +41,7 @@ export class AppSettingsService {
     return JSON.parse(appSettings);
   }
 
-  retrieveFromJson(): Observable<AppSettings> {
-    return this.http.get('./assets/app-settings.json').pipe(
-      catchError(() => of({})),
-      map(data => {
-        let appSettings = data as AppSettings;
-        if (Object.keys(appSettings).length === 0) {
-          appSettings = new AppSettings();
-        }
-        this.localStorage.setItem(this.appSettingKey, JSON.stringify(appSettings));
-        return appSettings;
-      })
-    );
+  retrieveFromJson(): Observable<any> {
+    return this.http.get('./assets/app-settings.json');
   }
 }

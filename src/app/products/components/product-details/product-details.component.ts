@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { ProductsService } from '../../services/products.service';
 import { switchMap } from 'rxjs/operators';
-import { IProduct } from '../../models/product.interface';
+import { ProductModel } from '../../models/product';
 import { CartService } from '../../../cart/services/cart.service';
 import { ProductsPromiseService } from '../../services/products-promise.service';
 
@@ -13,7 +12,7 @@ import { ProductsPromiseService } from '../../services/products-promise.service'
 })
 export class ProductDetailsComponent implements OnInit {
 
-  public product: IProduct;
+  public product: ProductModel;
   public notFound = false;
 
   constructor(

@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   @ViewChild('appTitle') appTitle: ElementRef;
 
   constructor(
-    private cartService: CartService
+    public cartService: CartService
   ) {}
 
   ngOnInit(): void {

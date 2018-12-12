@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProductModel } from '../models/product';
 import { AppSettingsService } from 'src/app/core/services/app-settings.service';
+import { concatMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,16 @@ export class ProductsPromiseService {
   constructor(
     private http: HttpClient,
     private appSettings: AppSettingsService) {
-      this.appSettings.getAppSettings().subscribe(appSettings => this.productsUrl = appSettings.productsUrl);
     }
 
   getProducts(): Promise<ProductModel[]> {
-    return this.http
-      .get(this.productsUrl)
-      .toPromise()
-      .then(response => <ProductModel[]>response);
+    return this.appSettings.getAppSettings().pipe(
+      concatMap(settings => {
+        this.productsUrl = settings.productsUrl;
+        return this.http.get(this.productsUrl); }
+        ))
+    .toPromise()
+    .then(response => <ProductModel[]>response);
   }
 
   getById(id: number): Promise<ProductModel> {

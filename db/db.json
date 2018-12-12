@@ -16,16 +16,6 @@
       "category": 0,
       "tags": [],
       "categoryName": "unknown"
-    },
-    {
-      "id": 3,
-      "name": "ввв",
-      "description": "",
-      "price": 333,
-      "isAvailable": false,
-      "category": 0,
-      "tags": [],
-      "categoryName": "unknown"
     }
   ],
   "orders": [

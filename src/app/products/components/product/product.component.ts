@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IProduct } from '../../models/product.interface';
+import { ProductModel } from '../../models/product';
 
 @Component({
   selector: 'app-product',
@@ -8,7 +9,7 @@ import { IProduct } from '../../models/product.interface';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product: IProduct;
+  @Input() product: ProductModel;
 
   @Output() addToCart: EventEmitter<IProduct> = new EventEmitter();
 
