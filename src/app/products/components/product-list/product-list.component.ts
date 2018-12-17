@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
 import { IProduct } from '../../models/product.interface';
 import { CartService } from '../../../cart/services/cart.service';
-import { ProductsPromiseService } from '../../services/products-promise.service';
+
+import { Store, select } from '@ngrx/store';
+import { AppState } from './../../../core/+store/app.state';
+import { getProductsData } from './../../../core/+store/products';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -11,15 +14,17 @@ import { ProductsPromiseService } from '../../services/products-promise.service'
 })
 export class ProductListComponent implements OnInit {
 
-  products: Promise<IProduct[]>;
+  products: Observable<IProduct[]>;
 
   constructor(
-    private productsService: ProductsPromiseService,
-    private cartService: CartService
+    private cartService: CartService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.products = this.productsService.getProducts();
+    this.products = this.store.pipe(select(getProductsData));
+
+    console.log('We have a store!', this.store);
   }
 
   onAddToCart(product: IProduct) {

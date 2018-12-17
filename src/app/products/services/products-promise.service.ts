@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProductModel } from '../models/product';
 import { AppSettingsService } from 'src/app/core/services/app-settings.service';
-import { concatMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsPromiseService {
-  private productsUrl;
 
   constructor(
     private http: HttpClient,
@@ -16,17 +14,13 @@ export class ProductsPromiseService {
     }
 
   getProducts(): Promise<ProductModel[]> {
-    return this.appSettings.getAppSettings().pipe(
-      concatMap(settings => {
-        this.productsUrl = settings.productsUrl;
-        return this.http.get(this.productsUrl); }
-        ))
-    .toPromise()
-    .then(response => <ProductModel[]>response);
+    return this.http.get(this.appSettings.currentSettings.productsUrl)
+      .toPromise()
+      .then(response => <ProductModel[]>response);
   }
 
   getById(id: number): Promise<ProductModel> {
-    const url = `${this.productsUrl}/${id}`;
+    const url = `${this.appSettings.currentSettings.productsUrl}/${id}`;
 
     return this.http
       .get(url)
@@ -35,7 +29,7 @@ export class ProductsPromiseService {
   }
 
   updateProduct(product: ProductModel): Promise<ProductModel> {
-    const url = `${this.productsUrl}/${product.id}`,
+    const url = `${this.appSettings.currentSettings.productsUrl}/${product.id}`,
       body = JSON.stringify(product),
       options = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -48,7 +42,7 @@ export class ProductsPromiseService {
   }
 
   createProduct(product: ProductModel): Promise<ProductModel> {
-    const url = this.productsUrl,
+    const url = this.appSettings.currentSettings.productsUrl,
       body = JSON.stringify(product),
       options = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -61,7 +55,7 @@ export class ProductsPromiseService {
   }
 
   deleteProduct(id: number): Promise<any> {
-    const url = `${this.productsUrl}/${id}`;
+    const url = `${this.appSettings.currentSettings.productsUrl}/${id}`;
 
     return (
       this.http

@@ -1,3 +1,2 @@
-1. Added using of JSON-api and HttpClient (see \src\app\cart\services\order-observable.service.ts, \src\app\products\services\products-promise.service.ts)
-2. Added TimingInterceptor (see \src\app\core\interceptors\timing.interceptor.ts), that log executing time of requests to Products JSON endpoint
-3. Implemented AppSettingsService, that tries to retrieve settings from localStorage/json (see \src\app\core\services\app-settings.service.ts)
+1. Added store (including effects and entities) for products feature area. All usings of products-service were removed from components.
+2. Added router-store. All direct usings of Router removed from products feature area and replaced with store router actions. 

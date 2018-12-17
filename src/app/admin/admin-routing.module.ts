@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { ManageProductsComponent } from './components/manage-products/manage-products.component';
 import { ManageOrdersComponent } from './components/manage-orders/manage-orders.component';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { ProductsStatePreloadingGuard } from '../products/guards';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
     children: [
       {
         path: 'products',
-        component: ManageProductsComponent
+        component: ManageProductsComponent,
+        canActivate: [ProductsStatePreloadingGuard]
       },
       {
         path: 'orders',

@@ -9,6 +9,11 @@ import { ProductEditComponent } from './components/product-edit/product-edit.com
 import { FormsModule } from '@angular/forms';
 import { ProductFeedbackComponent } from './components/product-feedback/product-feedback.component';
 
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffects, productsReducer } from './../core/+store/products';
+import { ProductsServicesModule } from './products-services.module';
+
 @NgModule({
   declarations: [
     ProductListComponent,
@@ -21,7 +26,10 @@ import { ProductFeedbackComponent } from './components/product-feedback/product-
     CommonModule,
     SharedModule,
     FormsModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    ProductsServicesModule,
+    StoreModule.forFeature('products', productsReducer),
+    EffectsModule.forFeature([ProductsEffects])
   ],
   exports: [
 

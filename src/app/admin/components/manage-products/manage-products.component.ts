@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../../products/services/products.service';
-import { ProductsPromiseService } from 'src/app/products/services/products-promise.service';
 import { ProductModel } from 'src/app/products/models/product';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/core/+store/app.state';
+import { getProductsData } from 'src/app/core/+store/products';
+import { Observable } from 'rxjs';
+import * as ProductsActions from './../../../core/+store/products/products.actions';
 
 @Component({
   selector: 'app-manage-products',
@@ -10,19 +13,21 @@ import { ProductModel } from 'src/app/products/models/product';
 })
 export class ManageProductsComponent implements OnInit {
 
-  products: Promise<ProductModel[]>;
+  products: Observable<ProductModel[]>;
 
-  constructor(private productsService: ProductsPromiseService) { }
+  constructor(
+    private store: Store<AppState>
+    ) { }
 
   ngOnInit() {
-    this.products = this.productsService.getProducts();
+    this.products = this.store.pipe(select(getProductsData));
   }
 
   onDelete(id: number): void {
-    this.productsService.deleteProduct(id);
+    this.store.dispatch(new ProductsActions.DeleteProduct(id));
   }
 
   onUpdate(product: ProductModel): void {
-    this.productsService.updateProduct(product);
+    this.store.dispatch(new ProductsActions.UpdateProduct(product));
   }
 }

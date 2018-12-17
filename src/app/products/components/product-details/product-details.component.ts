@@ -1,37 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductModel } from '../../models/product';
 import { CartService } from '../../../cart/services/cart.service';
-import { ProductsPromiseService } from '../../services/products-promise.service';
+import { Subscription } from 'rxjs';
+
+import { AppState } from './../../../core/+store/app.state';
+import { getSelectedProductByUrl } from './../../../core/+store/products';
+import { Store, select } from '@ngrx/store';
+import * as RouterActions from './../../../core/+store/router/router.actions';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   public product: ProductModel;
   public notFound = false;
 
+  private sub: Subscription;
+
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private productsService: ProductsPromiseService,
-    private cartService: CartService
+    private cartService: CartService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      switchMap((params: Params) => this.productsService.getById(+params.get('id'))))
-      .subscribe(product => {
-        if (product) {
-          this.product = product;
-        } else {
-          this.notFound = true;
-        }
-      });
+    this.sub = this.store.pipe(select(getSelectedProductByUrl))
+      .subscribe(product => this.product = product);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onAddToCart(): void {
@@ -39,6 +39,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   onDisplayFeedback(): void {
-    this.router.navigate([this.router.routerState.snapshot.url, { outlets: { feedback: ['feedback'] } }]);
+    this.store.dispatch(new RouterActions.Outlet({outlets: { feedback: ['feedback'] } }));
   }
 }

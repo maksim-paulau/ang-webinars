@@ -10,38 +10,46 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class AppSettingsService {
 
+  public currentSettings: AppSettings;
+
   private appSettingKey = 'appSettings';
 
   constructor(private localStorage: LocalStorageService, private http: HttpClient) { }
 
-  getAppSettings(): Observable<AppSettings> {
+  loadAppSettings(): Observable<boolean> {
 
     const appSettings = this.retrieveFromLocalStorage();
 
     if (appSettings !== null) {
-      return of(appSettings);
+      this.currentSettings = appSettings;
+      console.log('AppSettings loaded from LocalStorage');
+      return of(true);
     }
 
     return this.retrieveFromJson().pipe(
       map(data => {
         const appSettingsFromJson = data as AppSettings;
         this.localStorage.setItem(this.appSettingKey, JSON.stringify(appSettingsFromJson));
-        return appSettingsFromJson;
+        this.currentSettings = appSettingsFromJson;
+        console.log('AppSettings loaded from JSON');
+        return true;
       }),
       catchError(() => {
         const defaultAppSettings = new AppSettings();
         this.localStorage.setItem(this.appSettingKey, JSON.stringify(defaultAppSettings));
-        return of(defaultAppSettings);
+        this.currentSettings = defaultAppSettings;
+        console.log('Fail to load appSettings, use default');
+        return of(true);
       })
     );
   }
 
-  retrieveFromLocalStorage(): any {
+  private retrieveFromLocalStorage(): any {
     const appSettings = this.localStorage.getItem(this.appSettingKey);
     return JSON.parse(appSettings);
   }
 
-  retrieveFromJson(): Observable<any> {
+  private retrieveFromJson(): Observable<any> {
     return this.http.get('./assets/app-settings.json');
   }
 }

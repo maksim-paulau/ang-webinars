@@ -4,18 +4,8 @@
       "id": 1,
       "name": "Picture P. Picasso",
       "description": "One of the greatest works of the greatest master",
-      "price": 365,
+      "price": 371,
       "isAvailable": true
-    },
-    {
-      "id": 2,
-      "name": "Toy Car",
-      "description": "",
-      "price": 59,
-      "isAvailable": true,
-      "category": 0,
-      "tags": [],
-      "categoryName": "unknown"
     }
   ],
   "orders": [

@@ -4,11 +4,13 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductEditComponent } from './components/product-edit/product-edit.component';
 import { ProductFeedbackComponent } from './components/product-feedback/product-feedback.component';
+import { ProductsStatePreloadingGuard, ProductExistGuard } from './guards';
 
 const routes: Routes = [
   {
     path: 'home',
-    component: ProductListComponent
+    component: ProductListComponent,
+    canActivate: [ProductsStatePreloadingGuard]
   },
   {
     path: 'product/create',
@@ -17,6 +19,7 @@ const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailsComponent,
+    canActivate: [ProductExistGuard],
     children: [
       {
         path: 'feedback',
