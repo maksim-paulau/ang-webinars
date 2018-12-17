@@ -1,2 +1,3 @@
 1. Added store (including effects and entities) for products feature area. All usings of products-service were removed from components.
-2. Added router-store. All direct usings of Router removed from products feature area and replaced with store router actions. 
+2. Added router-store. All direct usings of Router removed from products feature area and replaced with store router actions.
+3. Added  products preloading guard, which uses appSettings guard inside, that lets us to load appSettings before the loading of products components. 
