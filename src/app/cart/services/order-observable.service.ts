@@ -22,10 +22,10 @@ export class OrderObservableService {
     return this.http.get<Order>(`${this.ordersUrl}/${id}`);
   }
 
-  createOrder(name: string, phone: string, products: CartItem[], price: number): Observable<Order> {
+  createOrder(name: string, phones: string[], products: CartItem[], price: number): Observable<Order> {
     return this.getOrders().pipe(
       switchMap((orders) => {
-        const newOrder = new Order(orders.length + 1, name, phone, products, price);
+        const newOrder = new Order(orders.length + 1, name, phones, products, price);
         return this.http.post<Order>(this.ordersUrl, JSON.stringify(newOrder), {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       }); })

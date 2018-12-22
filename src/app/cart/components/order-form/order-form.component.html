@@ -1,36 +1,61 @@
 <div class="panel panel-default">
-  <div class="panel-heading">
-      <h4 class="pannel-title">
-          Order Form
-      </h4>
-  </div>
-  <div class="panel-body">
-      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" 
-              class="form-control" 
-              id="name" name="name"
-              placeholder="Name"
-              required ngModel>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone</label>
-          <input type="text" 
-              class="form-control" 
-              id="phone" name="phone"
-              placeholder="Phone"
-              required ngModel>
-        </div>
-  <button 
-          type="submit" 
-          class="btn btn-primary"
-          [disabled]="form.invalid">Send
-      </button>
-      <button class="btn btn-primary"
-          type="button"
-          (click)="onCancel()">Cancel
-      </button>
-      </form>
-  </div>
+    <div class="panel-heading">
+        <h4 class="pannel-title">
+            Order Form
+        </h4>
+    </div>
+    <div class="panel-body">
+        <form (ngSubmit)="onSubmit()" [formGroup]="orderForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input [ngClass]="{'is-invalid': !orderForm.get('name').valid }" type="text" class="form-control" id="nameInput"
+                    placeholder="Name" formControlName="name" />
+                <span class="invalid-feedback" *ngFor="let validationMessage of getValidationMessages('name')">
+                    {{ validationMessage }}
+                </span>
+            </div>
+            <div formArrayName="phones">
+                <label for="phone">Phones</label>
+                <div *ngFor="let phone of phones.controls; let i = index">
+                    <div class="form-group input-group">
+                        <input [ngClass]="{'is-invalid': !phone.valid }" type="text" class="form-control" id="phoneInput"
+                            placeholder="Phone" [formControlName]="i">
+                        <div *ngIf="i>0" class="input-group-append">
+                            <button class="btn" type="button" (click)="onRemovePhone(i)">
+                                X
+                            </button>
+                        </div>
+                        <span class="invalid-feedback" *ngFor="let validationMessage of getValidationMessages('phones', i)">
+                            {{ validationMessage }}
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-sm" type="button" (click)="onAddPhone()">
+                        + Add another phone
+                    </button>
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <input class="form-check-input" type="checkbox" formControlName="delivery">
+                <label class="form-check-label" for="delivery">Delivery</label>
+            </div>
+            <div *ngIf="orderForm.get('delivery').value" formGroupName="address" class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" placeholder="City" formControlName="city" />
+                <input type="text" class="form-control" placeholder="Street" formControlName="street" />
+                <input type="text" class="form-control" placeholder="Building number" formControlName="street" />
+                <input type="number" class="form-control" placeholder="Apartment number" formControlName="apartment" />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" [disabled]="!orderForm.valid">
+                    Send
+                </button>
+                <button class="btn btn-primary" type="button" (click)="onCancel()">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

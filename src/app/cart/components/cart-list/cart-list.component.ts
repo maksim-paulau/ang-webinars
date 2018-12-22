@@ -51,7 +51,7 @@ export class CartListComponent implements OnInit {
   }
 
   onOrderSubmit(formData: any): void {
-    const sub = this.orderService.createOrder(formData.name, formData.phone, this.cartService.productsInCart, this.cartService.summaryPrice)
+    const sub = this.orderService.createOrder(formData.name, formData.phones, this.cartService.productsInCart, this.cartService.summaryPrice)
     .subscribe(() => {
       this.showOrderForm = false;
       this.onClear();

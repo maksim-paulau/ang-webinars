@@ -4,7 +4,7 @@ export class Order {
     constructor(
         public id: number,
         public clientName: string,
-        public clientPhoneNumber: string,
+        public clientPhoneNumbers: string[],
         public products: CartItem[],
         public summaryPrice: number,
         public done: boolean = false

@@ -16,8 +16,8 @@ export class OrderService {
     this.orders = JSON.parse(this.localStorage.getItem(ordersStorageKey)) || [];
   }
 
-  createOrder(name: string, phone: string, products: CartItem[], price: number) {
-    const newOrder: Order = new Order(this.orders.length, name, phone, products, price);
+  createOrder(name: string, phones: string[], products: CartItem[], price: number) {
+    const newOrder: Order = new Order(this.orders.length, name, phones, products, price);
     this.orders.push(newOrder);
 
     this.updateStorage();
