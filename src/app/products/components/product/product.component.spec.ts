@@ -1,6 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductComponent } from './product.component';
+import { Input, Directive } from '@angular/core';
+import { ProductModel } from '../../models/product';
+
+@Directive({  
+  selector: '[routerLink]'  
+})
+class RouterLinkStubDirective {  
+  @Input('routerLink') linkParams: any;  
+}
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -8,7 +17,7 @@ describe('ProductComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductComponent ]
+      declarations: [ ProductComponent, RouterLinkStubDirective ]
     })
     .compileComponents();
   }));
@@ -16,6 +25,7 @@ describe('ProductComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
+    component.product = new ProductModel();
     fixture.detectChanges();
   });
 

@@ -1,6 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductListComponent } from './product-list.component';
+import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+@Component({selector: 'app-product', template: ''})
+class ProductStubComponent {
+  @Input() product;
+}
+
+const StoreStub = {
+  pipe: function(){}
+};
 
 describe('ProductListComponent', () => {
   let component: ProductListComponent;
@@ -8,7 +19,10 @@ describe('ProductListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductListComponent ]
+      declarations: [ ProductListComponent, ProductStubComponent ],
+      providers: [
+        { provide: Store, useValue: StoreStub }
+      ]
     })
     .compileComponents();
   }));

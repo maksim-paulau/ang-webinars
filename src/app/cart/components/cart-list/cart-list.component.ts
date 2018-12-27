@@ -4,7 +4,7 @@ import { IProduct } from '../../../products/models/product.interface';
 import { CartItem } from '../../models/cart-item';
 import { OrderByPipe } from '../../../shared/order-by.pipe';
 import { OrderService } from '../../services/order.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { OrderObservableService } from '../../services/order-observable.service';
@@ -24,22 +24,13 @@ export class CartListComponent implements OnInit {
   constructor(private cartService: CartService,
               private orderService: OrderObservableService,
               private orderByPipe: OrderByPipe,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.showOrderForm = this.router.routerState.snapshot.root.firstChild.params.showOrderForm;
-
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => this.router.routerState.root.firstChild),
-        switchMap(route => route.params)
-      )
-      .subscribe(
-        data => {
-          this.showOrderForm = data.showOrderForm;
-        }
-      );
+    this.route.paramMap.subscribe(paramMap=>{        
+        this.showOrderForm =!!paramMap.get('showOrderForm');      
+    });
   }
 
   onClear(): void {
