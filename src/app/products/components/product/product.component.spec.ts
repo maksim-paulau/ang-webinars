@@ -4,11 +4,11 @@ import { ProductComponent } from './product.component';
 import { Input, Directive } from '@angular/core';
 import { ProductModel } from '../../models/product';
 
-@Directive({  
-  selector: '[routerLink]'  
+@Directive({
+  selector: '[routerLink]'
 })
-class RouterLinkStubDirective {  
-  @Input('routerLink') linkParams: any;  
+class RouterLinkStubDirective {
+  @Input('routerLink') linkParams: any;
 }
 
 describe('ProductComponent', () => {

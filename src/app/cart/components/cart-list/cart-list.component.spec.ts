@@ -40,8 +40,8 @@ describe('CartListComponent', () => {
     activatedRouteStub = new ActivatedRouteStub();
 
     TestBed.configureTestingModule({
-      declarations: [ 
-        CartListComponent, 
+      declarations: [
+        CartListComponent,
         CartItemStubComponent,
         OrderFormStubComponent
       ],
@@ -59,7 +59,7 @@ describe('CartListComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CartListComponent);
-    component = fixture.componentInstance;    
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

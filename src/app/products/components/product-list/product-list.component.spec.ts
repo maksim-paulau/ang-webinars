@@ -10,7 +10,7 @@ class ProductStubComponent {
 }
 
 const StoreStub = {
-  pipe: function(){}
+  pipe: function() {}
 };
 
 describe('ProductListComponent', () => {

@@ -4,14 +4,14 @@ import { CartItem } from '../models/cart-item';
 
 describe('CartService', () => {
     let service: CartService;
-    
+
     it('addProduct should add product to cart', () => {
         const lsServiceMock = {
             getItem(key: string) {
                 return '[]';
             },
             setItem(key: string, value: any) {}
-        }
+        };
         service = new CartService(lsServiceMock as LocalStorageService);
         const spy = spyOn(lsServiceMock, 'setItem');
 
@@ -27,7 +27,7 @@ describe('CartService', () => {
                 return '[{"id": 1, "quantity":1}]';
             },
             setItem(key: string, value: any) {}
-        }
+        };
         service = new CartService(lsServiceMock as LocalStorageService);
         const spy = spyOn(lsServiceMock, 'setItem');
 
@@ -43,7 +43,7 @@ describe('CartService', () => {
                 return '[{"id": 1, "quantity":1}]';
             },
             setItem(key: string, value: any) {}
-        }
+        };
         service = new CartService(lsServiceMock as LocalStorageService);
         const spy = spyOn(lsServiceMock, 'setItem');
 
@@ -52,4 +52,4 @@ describe('CartService', () => {
         expect(service.productsQuantity).toBe(0);
         expect(spy.calls.count()).toBe(1);
     });
-})
+});
