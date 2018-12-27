@@ -1,1 +1,3 @@
-1. Added reactive form with validations, form arrays and form groups (see src\app\cart\components\order-form\)
+1. Added isolated tests for cart.service(src\app\cart\services\cart.service.spec.ts) and order-by.pipe(src\app\shared\order-by.pipe.spec.ts)
+2. Added integrated tests for components (src\app\app.component.spec.ts, src\app\contact-us\contact-us.component.spec.ts, src\app\cart\components\cart-item\cart-item.component.spec.ts, src\app\cart\components\cart-list\cart-list.component.spec.ts)
+3. Added code coverage report
